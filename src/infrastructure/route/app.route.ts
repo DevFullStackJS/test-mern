@@ -17,7 +17,7 @@ const appRoutes = () => {
   router.use('/utilisateur', utilisateurRouter);
   router.use('/authentification', authentificationRouter);
   router.use('/inscription', inscriptionRouter);
-  router.use('/voitures', voituresRouter);
+  router.use('/voitures', secured, voituresRouter);
   router.use('/administrateur', administrateurRouter);
   router.use('/commentaire', secured, commentaireRouter);
   
