@@ -10,6 +10,12 @@ const errorMessage = {
 export const conditionnalJwtPassport = (isSecured: boolean) => (req, res, next) =>
   isSecured
     ? passport.authenticate(passportStrategies.jwt, { session: false }, (err, user, info) => {
+      const { method, baseUrl } = req;
+        if((method === 'GET' || method === 'get') && baseUrl === '/api/voitures') {
+          req.user = {};
+          return next();
+        }
+        console.log({ req });
         if (err) {
           res.locals.statusCode = HttpStatus.UNAUTHORIZED;
           return next(err);
